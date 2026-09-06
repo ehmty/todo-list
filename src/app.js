@@ -56,3 +56,5 @@ class App {
         this.projects = this.projects.filter(project => project.name === "default" || project.id !== id);
     }
 }
+
+export { Todo, Project, App };
