@@ -5,6 +5,7 @@ class Todo {
         this.dueDate = dueDate;
         this.priority = priority;
         this.status = status;
+        this.id = crypto.randomUUID();        
     }
 
     changeProperty(name, value) {
@@ -20,17 +21,15 @@ class Project {
     constructor(name) {
         this.name = name;
         this.todos = [];
+        this.id = crypto.randomUUID();
     }
 
     addTodo(todo) {
         this.todos.push(todo);
     }
 
-    removeTodo(todo) {
-        const todoIndex = this.todos.findIndex(item => item === todo);
-        if (todoIndex !== -1) {
-            this.todos.splice(todoIndex, 1);
-        }
+    removeTodo(id) {
+        this.todos = this.todos.filter(todo => todo.id !== id);
     }
 }
 
@@ -53,10 +52,7 @@ class App {
         this.projects.push(project);
     }
 
-    removeProject(project) {
-        const projectIndex = this.projects.findIndex(item => item === project);
-        if (projectIndex !== -1 && project !== this.projects[0]) {
-            this.projects.splice(projectIndex, 1);
-        }
+    removeProject(id) {
+        this.projects = this.projects.filter(project => project.name === "default" || project.id !== id);
     }
 }
