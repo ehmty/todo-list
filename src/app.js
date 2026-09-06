@@ -32,8 +32,17 @@ class Project {
 
 class App {
     constructor() {
-        this.defaultProject = new Project("default");
-        this.projects = [this.defaultProject]
+        this.projects = [new Project("default")]
+    }
+
+    addToDefaultProject(todo) {
+        this.projects[0].addTodo(todo);
+    }
+
+    addToSpecificProject(todo, project) {
+        if (this.projects.includes(project)) {
+            project.addTodo(todo);
+        }
     }
 
     addProject(project) {
