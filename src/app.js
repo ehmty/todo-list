@@ -51,7 +51,7 @@ class App {
 
     removeProject(project) {
         const projectIndex = this.projects.findIndex(item => item === project);
-        if (projectIndex !== -1) {
+        if (projectIndex !== -1 && project !== this.projects[0]) {
             this.projects.splice(projectIndex, 1);
         }
     }
