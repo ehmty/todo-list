@@ -7,6 +7,10 @@ class Todo {
         this.status = status;
     }
 
+    changeProperty(name, value) {
+        this[name] = value;
+    }
+
     toggleStatus() {
         this.status = this.status === "open" ? "done" : "open";
     }
