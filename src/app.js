@@ -28,8 +28,8 @@ class Project {
 
 class App {
     constructor() {
-        this.projects = []
         this.defaultProject = new Project("default");
+        this.projects = [this.defaultProject]
     }
 
     addProject(project) {
