@@ -6,6 +6,10 @@ class Todo {
         this.priority = priority;
         this.status = status;
     }
+
+    toggleStatus() {
+        this.status = this.status === "open" ? "done" : "open";
+    }
 }
 
 class Project {
