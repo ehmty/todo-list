@@ -6,7 +6,7 @@ function showProjects(projects) {
         const projectButton = document.createElement("button");
         const span = document.createElement("span");
 
-        projectButton.textContent = project.name;
+        projectButton.textContent = project.isDefault ? "Inbox" : project.name;
         span.textContent = project.todos.length;
 
         projectButton.classList.add("sidebar-btn");

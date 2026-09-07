@@ -18,10 +18,11 @@ class Todo {
 }
 
 class Project {
-    constructor(name) {
+    constructor(name, isDefault = false) {
         this.name = name;
         this.todos = [];
         this.id = crypto.randomUUID();
+        this.isDefault = isDefault;
     }
 
     addTodo(todo) {
@@ -35,11 +36,12 @@ class Project {
 
 class App {
     constructor() {
-        this.projects = [new Project("default")]
+        this.projects = [new Project("default", true)];
     }
 
     addToDefaultProject(todo) {
-        this.projects[0].addTodo(todo);
+        const defaultProject = this.projects.find(project => project.isDefault);
+        defaultProject.addTodo(todo);
     }
 
     addToSpecificProject(todo, project) {
@@ -53,7 +55,7 @@ class App {
     }
 
     removeProject(id) {
-        this.projects = this.projects.filter(project => project.name === "default" || project.id !== id);
+        this.projects = this.projects.filter(project => project.isDefault || project.id !== id);
     }
 }
 
