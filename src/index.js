@@ -1,3 +1,5 @@
 import "./style.css"
+import { Todo, Project, App } from "./app.js"
+import { showProjects } from "./dom.js";
 
-console.log("Hello");
+const app = new App();
