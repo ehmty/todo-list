@@ -16,4 +16,27 @@ function showProjects(projects) {
     }
 }
 
-export { showProjects };
+function createInput() {
+    const sidebar = document.querySelector(".button-list");
+    const form = document.createElement("form");
+
+    const existingInput = document.querySelector(".input");
+    if (existingInput) {
+        existingInput.focus();
+        return existingInput;
+    }
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.classList.add("input");
+    input.required = true;
+
+    form.append(input);
+    sidebar.append(form);
+
+    input.focus();
+
+    return {form, input};
+}
+
+export { showProjects, createInput };
