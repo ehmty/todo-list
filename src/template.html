@@ -21,50 +21,42 @@
   <div class="content">
     <div class="header">
       <h1>All Todos</h1>
-      <button class="header-btn">+ New Todo</button>
     </div>
 
     <div class="main">
-      <div class="todo-card">
-        <button class="status"></button>
 
-        <div class="todo-info">
-          <h3 class="title">Finish Todo App</h3>
-          <p class="description">Create the basic todo app</p>
+      <div class="todo-list">
+
+        <div class="todo-card">
+          <button class="status"></button>
+          <div class="todo-info">
+            <h3 class="title">Finish Todo App</h3>
+            <p class="description">Create the basic todo app</p>
+          </div>
+          <div class="priority high">High</div>
+          <div class="due-date">Sep 7</div>
         </div>
-
-        <div class="priority high">High</div>
-        <div class="due-date">Sep 7</div>
-
-      </div>
-      <div class="todo-card">
-        <button class="status"></button>
-
-        <div class="todo-info">
-          <h3 class="title">Finish Todo App</h3>
-          <p class="description">Create the basic todo app</p>
-        </div>
-
-        <div class="priority low">Low</div>
-        <div class="due-date">Okt 1</div>
-
-      </div>
-      <div class="todo-card">
-        <button class="status"></button>
-
-        <div class="todo-info">
-          <h3 class="title">Finish Todo App</h3>
-          <p class="description">Create the basic todo app</p>
-        </div>
-
-        <div class="priority medium">Medium</div>
-        <div class="due-date">Sep 10</div>
 
       </div>
 
     </div>
 
+      <form class="todo-input-bar">
+
+        <button type="submit">+</button>
+
+        <input type="text" id="title" name="title" placeholder="Add a task..." required>
+        <input type="date" id="due-date" name="due-date">
+
+        <select name="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+
+      </form>
+
   </div>
-  
+
 </body>
 </html>
