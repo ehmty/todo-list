@@ -16,7 +16,7 @@ function showProjects(projects) {
     }
 }
 
-function createInput() {
+function createProjectInput() {
     const sidebar = document.querySelector(".button-list");
     const form = document.createElement("form");
 
@@ -39,4 +39,36 @@ function createInput() {
     return {form, input};
 }
 
-export { showProjects, createInput };
+function showTodos(todos) {
+    const todoList = document.querySelector(".todo-list");
+    todoList.textContent = "";
+    
+    for (const todo of todos) {
+        const todoCard = document.createElement("div");
+        
+        const todoStatus = document.createElement("button");
+        const todoInfo = document.createElement("div");
+        const todoTitle = document.createElement("h3");
+        const todoPriority = document.createElement("div");
+        const todoDueDate = document.createElement("div");
+        
+        todoCard.classList.add("todo-card");
+        todoStatus.classList.add("status");
+        todoInfo.classList.add("todo-info");
+        todoTitle.classList.add("title");
+        todoPriority.classList.add("priority", todo.priority);
+        todoDueDate.classList.add("due-date");
+        
+        todoTitle.textContent = todo.title;
+        todoPriority.textContent = todo.priority;
+        todoDueDate.textContent = todo.dueDate;
+        
+        todoInfo.append(todoTitle);
+        todoCard.append(todoStatus, todoInfo, todoPriority, todoDueDate);
+        todoList.append(todoCard);
+    }
+   
+}
+
+export { showProjects, createProjectInput, showTodos };
+
