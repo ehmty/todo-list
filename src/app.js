@@ -36,18 +36,22 @@ class Project {
 
 class App {
     constructor() {
-        this.projects = [new Project("default", true)];
+        const defaultProject = new Project("Inbox", true);
+        this.projects = [defaultProject];
+        this.currentProjectId = defaultProject.id;
     }
 
-    addToDefaultProject(todo) {
-        const defaultProject = this.projects.find(project => project.isDefault);
-        defaultProject.addTodo(todo);
+    getCurrentProject() {
+        return this.projects.find(project => this.currentProjectId === project.id);
     }
 
-    addToSpecificProject(todo, project) {
-        if (this.projects.includes(project)) {
-            project.addTodo(todo);
-        }
+    setCurrentProject(id) {
+        this.currentProjectId = id;
+    }
+
+    addToCurrentProject(todo) {
+        const currentProject = this.getCurrentProject();
+        currentProject.addTodo(todo);
     }
 
     addProject(project) {
