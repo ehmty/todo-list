@@ -215,15 +215,18 @@ body {
     flex: 1;
 }
 
-.delete-project-button {
+.delete-project-btn {
     border: none;
-    color: var(--blue);
-    opacity: 0.5;
-    cursor: pointer;
-    font-size: 1rem;
+    background: none;
+    cursor: pointer;    
 }
 
-.delete-project-button:hover {
-    opacity: 1;
-    color: #9C0006
+.delete-project-btn img {
+    width: 22px;
+    height: 22px;
+    opacity: 45%;
+}
+
+.delete-project-btn:hover img {
+    opacity: 80%;
 }
