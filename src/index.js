@@ -3,8 +3,7 @@ import { Todo, Project, App } from "./app.js"
 import { showProjects, createProjectInput, showTodos, showProjectHeader, setActive } from "./dom.js";
 
 const app = new App();
-const projects = app.projects;
-showProjects(projects);
+showProjects(app.projects);
 showTodos(app.getCurrentProject().todos);
 showProjectHeader(app.getCurrentProject());
 setActive(app.getCurrentProject().id);
@@ -22,7 +21,7 @@ newProjectBtn.addEventListener("click", () => {
         app.addProject(newProject);
         app.setCurrentProject(newProject.id);
 
-        showProjects(projects);
+        showProjects(app.projects);
         showTodos(app.getCurrentProject().todos);
         showProjectHeader(newProject);
         setActive(newProject.id);
@@ -44,7 +43,7 @@ todoForm.addEventListener("submit", (e) => {
     const todo = new Todo(title, description, priority, dueDate, status);
     app.addToCurrentProject(todo);
 
-    showProjects(projects);
+    showProjects(app.projects);
     showTodos(app.getCurrentProject().todos);
 
     todoForm.reset();
@@ -57,11 +56,25 @@ buttonList.addEventListener("click", e => {
     if (!projectButton) return;
 
     const projectId = projectButton.dataset.id;
-    const project = projects.find(project => project.id === projectId);
+    const project = app.projects.find(project => project.id === projectId);
     
     app.setCurrentProject(projectId);
 
     showTodos(app.getCurrentProject().todos);
     showProjectHeader(project);
     setActive(projectId);
+});
+
+
+const deleteBtn = document.querySelector(".delete-project-btn");
+deleteBtn.addEventListener("click", () => {
+    app.removeProject(app.getCurrentProject().id);
+
+    const defaultProject = app.projects.find((project) => project.isDefault);
+    app.setCurrentProject(defaultProject.id);
+
+    showProjects(app.projects);
+    showTodos(app.getCurrentProject().todos);
+    showProjectHeader(defaultProject);
+    setActive(defaultProject.id);
 });
