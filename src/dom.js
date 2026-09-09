@@ -6,10 +6,11 @@ function showProjects(projects) {
         const projectButton = document.createElement("button");
         const span = document.createElement("span");
 
-        projectButton.textContent = project.isDefault ? "Inbox" : project.name;
+        projectButton.textContent = project.name;
         span.textContent = project.todos.length;
 
         projectButton.classList.add("sidebar-btn");
+        projectButton.dataset.id = project.id;
 
         projectButton.append(span);
         sidebar.append(projectButton);
@@ -70,5 +71,21 @@ function showTodos(todos) {
    
 }
 
-export { showProjects, createProjectInput, showTodos };
+function showProjectHeader(project) {
+    const header = document.querySelector(".header h1");
+    const deleteBtn = document.querySelector(".delete-project-btn");
+    header.textContent = project.name;
+    deleteBtn.hidden = project.isDefault;
+}
 
+function setActive(projectId) {
+    const currentActiveButton = document.querySelector(".active")
+    if (currentActiveButton) {
+        currentActiveButton.classList.remove("active");
+    }
+
+    const projectButton = document.querySelector(`.sidebar-btn[data-id="${projectId}"]`);
+    projectButton.classList.add("active");
+}
+
+export { showProjects, createProjectInput, showTodos, showProjectHeader, setActive };
