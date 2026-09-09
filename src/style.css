@@ -230,3 +230,8 @@ body {
 .delete-project-btn:hover img {
     opacity: 80%;
 }
+
+.delete-project-btn:active img {
+    width: 20px;
+    height: 20px;
+}
