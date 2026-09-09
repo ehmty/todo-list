@@ -1,13 +1,13 @@
 import "./style.css"
 import { Todo, Project, App } from "./app.js"
-import { showProjects, createProjectInput, showTodos } from "./dom.js";
+import { showProjects, createProjectInput, showTodos, showProjectHeader, setActive } from "./dom.js";
 
 const app = new App();
 const projects = app.projects;
-const todos = projects[0].todos;
-
 showProjects(projects);
-showTodos(todos);
+showTodos(app.getCurrentProject().todos);
+showProjectHeader(app.getCurrentProject());
+setActive(app.getCurrentProject().id);
 
 const newProjectBtn = document.querySelector(".new-project-btn");
 newProjectBtn.addEventListener("click", () => {
@@ -16,9 +16,16 @@ newProjectBtn.addEventListener("click", () => {
     form.addEventListener("submit", e => {
         e.preventDefault();
 
-        const newProject = new Project(input.value);
+        const projectName = input.value;
+        const newProject = new Project(projectName);
+
         app.addProject(newProject);
+        app.setCurrentProject(newProject.id);
+
         showProjects(projects);
+        showTodos(app.getCurrentProject().todos);
+        showProjectHeader(newProject);
+        setActive(newProject.id);
     })
 
 });
@@ -34,10 +41,27 @@ todoForm.addEventListener("submit", (e) => {
     const dueDate = formData.get("due-date");
     const status = "open";
 
-    const todo = new Todo(title, description, priority, dueDate, status)
-    app.addToDefaultProject(todo);
-    showTodos(todos);
+    const todo = new Todo(title, description, priority, dueDate, status);
+    app.addToCurrentProject(todo);
+
+    showProjects(projects);
+    showTodos(app.getCurrentProject().todos);
 
     todoForm.reset();
     
+});
+
+const buttonList = document.querySelector(".button-list");
+buttonList.addEventListener("click", e => {
+    const projectButton = e.target.closest(".sidebar-btn");
+    if (!projectButton) return;
+
+    const projectId = projectButton.dataset.id;
+    const project = projects.find(project => project.id === projectId);
+    
+    app.setCurrentProject(projectId);
+
+    showTodos(app.getCurrentProject().todos);
+    showProjectHeader(project);
+    setActive(projectId);
 });
