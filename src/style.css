@@ -68,7 +68,7 @@ body {
     gap: 0.5rem;
 }
 
-.button-list .sidebar-btn:active {
+.button-list .active {
     background-color: var(--green);
 }
 
@@ -93,6 +93,8 @@ body {
 }
 
 .header {
+    display: flex;
+    gap: 1rem;
     padding: 2rem;
     box-shadow: 0 2px 4px -2px var(--blue);
 }
@@ -188,10 +190,6 @@ body {
     padding: 5px;
 }
 
-#title {
-    background-color: var(--light-green);
-}
-
 #due-date {
     width: 6.5rem;
 }
@@ -215,4 +213,17 @@ body {
 
 .todo-input-bar input[type="text"] {
     flex: 1;
+}
+
+.delete-project-button {
+    border: none;
+    color: var(--blue);
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.delete-project-button:hover {
+    opacity: 1;
+    color: #9C0006
 }
