@@ -1,8 +1,17 @@
 import "./style.css"
 import { Todo, Project, App } from "./app.js"
 import { showProjects, createProjectInput, showTodos, showProjectHeader, setActive } from "./dom.js";
+import { saveData, loadData, restoreProjects } from "./storage.js";
 
 const app = new App();
+
+const savedProjects = loadData();
+if (savedProjects) {
+    app.projects = restoreProjects(savedProjects);
+    const defaultProject = app.projects.find(project => project.isDefault);
+    app.setCurrentProject(defaultProject.id);
+}
+
 showProjects(app.projects);
 showTodos(app.getCurrentProject().todos);
 showProjectHeader(app.getCurrentProject());
@@ -25,6 +34,7 @@ newProjectBtn.addEventListener("click", () => {
         showTodos(app.getCurrentProject().todos);
         showProjectHeader(newProject);
         setActive(newProject.id);
+        saveData(app.projects);
     })
 
 });
@@ -46,6 +56,7 @@ todoForm.addEventListener("submit", (e) => {
     showProjects(app.projects);
     showTodos(app.getCurrentProject().todos);
     setActive(app.getCurrentProject().id);
+    saveData(app.projects);
 
     todoForm.reset();
     
@@ -78,6 +89,7 @@ deleteBtn.addEventListener("click", () => {
     showTodos(app.getCurrentProject().todos);
     showProjectHeader(defaultProject);
     setActive(defaultProject.id);
+    saveData(app.projects);
 });
 
 const todoList = document.querySelector(".todo-list");
@@ -93,6 +105,7 @@ todoList.addEventListener("click", (e) => {
     showProjects(app.projects);
     showTodos(app.getCurrentProject().todos);
     setActive(app.getCurrentProject().id);
+    saveData(app.projects);
 });
 
 todoList.addEventListener("click", (e) => {
@@ -128,5 +141,6 @@ todoList.addEventListener("click", (e) => {
     todo.changeProperty("dueDate", dueDate);
 
     showTodos(app.getCurrentProject().todos);
+    saveData(app.projects);
 
 });
