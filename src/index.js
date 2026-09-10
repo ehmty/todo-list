@@ -21,7 +21,7 @@ const newProjectBtn = document.querySelector(".new-project-btn");
 newProjectBtn.addEventListener("click", () => {
     const projectInput = createProjectInput();
     if (!projectInput) return;
-    
+
     const {form, input} = projectInput;
 
     form.addEventListener("submit", e => {
@@ -103,7 +103,8 @@ todoList.addEventListener("click", (e) => {
     const todoCard = todoStatusBtn.closest(".todo-card");
     const todoId = todoCard.dataset.id;
 
-    app.getCurrentProject().removeTodo(todoId);
+    const todo = app.getCurrentProject().todos.find(todo => todo.id === todoId);
+    todo.toggleStatus();
 
     showProjects(app.projects);
     showTodos(app.getCurrentProject().todos);
