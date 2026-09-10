@@ -19,7 +19,10 @@ setActive(app.getCurrentProject().id);
 
 const newProjectBtn = document.querySelector(".new-project-btn");
 newProjectBtn.addEventListener("click", () => {
-    const {form, input} = createProjectInput();
+    const projectInput = createProjectInput();
+    if (!projectInput) return;
+    
+    const {form, input} = projectInput;
 
     form.addEventListener("submit", e => {
         e.preventDefault();
