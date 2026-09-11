@@ -63,18 +63,19 @@ class App {
     }
 
     getArchiveTodos() {
-    const todos = [];
+        const todos = [];
 
-    for (const project of this.projects) {
-        for (const todo of project.todos) {
-            if (todo.status === "done") {
-                todos.push(todo);
+        for (const project of this.projects) {
+            for (const todo of project.todos) {
+                if (todo.status === "done") {
+                    todos.push(todo);
+                }
             }
         }
-    }
 
-    return todos;
-}
+        return todos;
+    }
+    
 }
 
 export { Todo, Project, App };
