@@ -1,4 +1,4 @@
-// import "./style.css"
+import "./style.css"
 import { Todo, Project, App } from "./app.js"
 import { showProjects, createProjectInput, showTodos, showProjectHeader, setActive } from "./dom.js";
 import { saveData, loadData, restoreProjects } from "./storage.js";
