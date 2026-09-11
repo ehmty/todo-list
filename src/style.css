@@ -245,6 +245,10 @@ body {
     margin: 0 1rem 1rem;
 }
 
+.todo-input-bar[hidden] {
+    display: none;
+}
+
 #title,
 #due-date,
 .todo-input-bar select {
