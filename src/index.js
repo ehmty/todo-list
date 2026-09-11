@@ -12,8 +12,13 @@ if (savedProjects) {
     app.setCurrentProject(defaultProject.id);
 }
 
+function showOpenTodos() {
+    const openTodos = app.getCurrentProject().todos.filter(todo => todo.status === "open");
+    showTodos(openTodos);
+}
+
 showProjects(app.projects);
-showTodos(app.getCurrentProject().todos);
+showOpenTodos();
 showProjectHeader(app.getCurrentProject());
 setActive(app.getCurrentProject().id);
 
@@ -34,7 +39,7 @@ newProjectBtn.addEventListener("click", () => {
         app.setCurrentProject(newProject.id);
 
         showProjects(app.projects);
-        showTodos(app.getCurrentProject().todos);
+        showOpenTodos();
         showProjectHeader(newProject);
         setActive(newProject.id);
         saveData(app.projects);
@@ -57,7 +62,7 @@ todoForm.addEventListener("submit", (e) => {
     app.addToCurrentProject(todo);
 
     showProjects(app.projects);
-    showTodos(app.getCurrentProject().todos);
+    showOpenTodos();
     setActive(app.getCurrentProject().id);
     saveData(app.projects);
 
@@ -70,12 +75,15 @@ buttonList.addEventListener("click", e => {
     const projectButton = e.target.closest(".sidebar-btn");
     if (!projectButton) return;
 
+    isArchive = false;
+    todoForm.hidden = false;
+
     const projectId = projectButton.dataset.id;
     const project = app.projects.find(project => project.id === projectId);
     
     app.setCurrentProject(projectId);
 
-    showTodos(app.getCurrentProject().todos);
+    showOpenTodos();
     showProjectHeader(project);
     setActive(projectId);
 });
@@ -89,7 +97,7 @@ deleteBtn.addEventListener("click", () => {
     app.setCurrentProject(defaultProject.id);
 
     showProjects(app.projects);
-    showTodos(app.getCurrentProject().todos);
+    showOpenTodos();
     showProjectHeader(defaultProject);
     setActive(defaultProject.id);
     saveData(app.projects);
@@ -97,6 +105,8 @@ deleteBtn.addEventListener("click", () => {
 
 const todoList = document.querySelector(".todo-list");
 todoList.addEventListener("click", (e) => {
+    if (isArchive) return;
+
     const todoStatusBtn = e.target.closest(".status");
     if (!todoStatusBtn) return;
 
@@ -107,12 +117,14 @@ todoList.addEventListener("click", (e) => {
     todo.toggleStatus();
 
     showProjects(app.projects);
-    showTodos(app.getCurrentProject().todos);
+    showOpenTodos();
     setActive(app.getCurrentProject().id);
     saveData(app.projects);
 });
 
 todoList.addEventListener("click", (e) => {
+    if (isArchive) return;
+
     const todoStatusBtn = e.target.closest(".status");
     if (todoStatusBtn) return;
 

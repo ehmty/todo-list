@@ -5,9 +5,10 @@ function showProjects(projects) {
     for (const project of projects) {
         const projectButton = document.createElement("button");
         const span = document.createElement("span");
+        const openTodos = project.todos.filter(todo => todo.status === "open");
 
         projectButton.textContent = project.name;
-        span.textContent = project.todos.length;
+        span.textContent = openTodos.length;
 
         projectButton.classList.add("sidebar-btn");
         projectButton.dataset.id = project.id;
@@ -45,8 +46,6 @@ function showTodos(todos) {
     todoList.textContent = "";
     
     for (const todo of todos) {
-        if (todo.status === "done") continue;
-
         const todoCard = document.createElement("div");
 
         const todoStatus = document.createElement("button");
