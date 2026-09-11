@@ -61,6 +61,20 @@ class App {
     removeProject(id) {
         this.projects = this.projects.filter(project => project.isDefault || project.id !== id);
     }
+
+    getArchiveTodos() {
+    const todos = [];
+
+    for (const project of this.projects) {
+        for (const todo of project.todos) {
+            if (todo.status === "done") {
+                todos.push(todo);
+            }
+        }
+    }
+
+    return todos;
+}
 }
 
 export { Todo, Project, App };

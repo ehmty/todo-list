@@ -130,18 +130,4 @@ function setActive(projectId) {
     projectButton.classList.add("active");
 }
 
-function getArchiveTodos(projects) {
-    const todos = [];
-
-    for (const project of projects) {
-        for (const todo of project.todos) {
-            if (todo.status === "done") {
-                todos.push(todo);
-            }
-        }
-    }
-
-    return todos;
-}
-
 export { showProjects, createProjectInput, showTodos, showProjectHeader, setActive, getArchiveTodos };
