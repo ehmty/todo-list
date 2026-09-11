@@ -1,3 +1,5 @@
+import deletIconSrc from "./asset/delete.svg";
+
 function showProjects(projects) {
     const sidebar = document.querySelector(".button-list");
     sidebar.textContent = "";
@@ -64,7 +66,7 @@ function showTodos(todos) {
 
         todoDelete.hidden = true;
 
-        deleteIcon.src = "./asset/delete.svg";
+        deleteIcon.src = deletIconSrc;
         deleteIcon.alt = "Delete todo";
         
         todoCard.dataset.id = todo.id;
