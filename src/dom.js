@@ -52,20 +52,34 @@ function showTodos(todos) {
         const todoTitle = document.createElement("h3");
         const todoPriority = document.createElement("div");
         const todoDueDate = document.createElement("div");
+        const todoDelete = document.createElement("button");
+        const deleteIcon = document.createElement("img");
         
         todoCard.classList.add("todo-card");
         todoStatus.classList.add("status");
         todoTitle.classList.add("title");
         todoPriority.classList.add("priority", todo.priority);
         todoDueDate.classList.add("due-date");
+        todoDelete.classList.add("todo-delete");
+
+        todoDelete.hidden = true;
+
+        deleteIcon.src = "./asset/delete.svg";
+        deleteIcon.alt = "Delete todo";
         
         todoCard.dataset.id = todo.id;
-
+        
         todoTitle.textContent = todo.title;
         todoPriority.textContent = todo.priority;
         todoDueDate.textContent = todo.dueDate;
 
-        todoCard.append(todoStatus, todoTitle, todoPriority, todoDueDate);
+        if (todo.status === "done") {
+            todoCard.classList.add("done");
+            todoDelete.hidden = false;
+        }
+
+        todoDelete.append(deleteIcon);
+        todoCard.append(todoStatus, todoTitle, todoPriority, todoDueDate, todoDelete);
 
         const todoDetails = document.createElement("div");
         todoDetails.hidden = true;
@@ -85,7 +99,7 @@ function showTodos(todos) {
         todoDescription.classList.add("description");
         todoPrioritySelect.classList.add("priority-input");
         todoDueDateInput.classList.add("due-date-input");
-        todoSaveBtn.classList.add("save-btn");        
+        todoSaveBtn.classList.add("save-btn");
         
         lowOption.value = "low";
         lowOption.textContent = "low";
@@ -94,8 +108,6 @@ function showTodos(todos) {
         highOption.value = "high";
         highOption.textContent = "high";
         
-        todoPrioritySelect.append(lowOption, mediumOption, highOption);
-
         todoPrioritySelect.value = todo.priority;
         todoTitleInput.value = todo.title;
         todoDescription.value = todo.description;
@@ -103,6 +115,8 @@ function showTodos(todos) {
         todoDueDateInput.type = "date";
         todoDueDateInput.value = todo.dueDate;
         todoSaveBtn.textContent = "Save";
+        
+        todoPrioritySelect.append(lowOption, mediumOption, highOption);
 
         todoDetails.append(todoTitleInput, todoDescription, todoPrioritySelect, todoDueDateInput, todoSaveBtn);
 
@@ -110,7 +124,7 @@ function showTodos(todos) {
         todoList.append(todoCard);
     }
    
-}
+} 
 
 function showProjectHeader(project) {
     const header = document.querySelector(".header h1");
@@ -125,8 +139,11 @@ function setActive(projectId) {
         currentActiveButton.classList.remove("active");
     }
 
-    const projectButton = document.querySelector(`.sidebar-btn[data-id="${projectId}"]`);
+    const projectButton = projectId === "archive"
+    ? document.querySelector(".archive-btn")
+    : document.querySelector(`.sidebar-btn[data-id="${projectId}"]`)
+
     projectButton.classList.add("active");
 }
 
-export { showProjects, createProjectInput, showTodos, showProjectHeader, setActive, getArchiveTodos };
+export { showProjects, createProjectInput, showTodos, showProjectHeader, setActive };
