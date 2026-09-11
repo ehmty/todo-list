@@ -1,9 +1,10 @@
-import "./style.css"
+// import "./style.css"
 import { Todo, Project, App } from "./app.js"
 import { showProjects, createProjectInput, showTodos, showProjectHeader, setActive } from "./dom.js";
 import { saveData, loadData, restoreProjects } from "./storage.js";
 
 const app = new App();
+let isArchive = false;
 
 const savedProjects = loadData();
 if (savedProjects) {
@@ -12,13 +13,13 @@ if (savedProjects) {
     app.setCurrentProject(defaultProject.id);
 }
 
-function showOpenTodos() {
+function showCurrentProjectTodos() {
     const openTodos = app.getCurrentProject().todos.filter(todo => todo.status === "open");
     showTodos(openTodos);
 }
 
 showProjects(app.projects);
-showOpenTodos();
+showCurrentProjectTodos();
 showProjectHeader(app.getCurrentProject());
 setActive(app.getCurrentProject().id);
 
@@ -32,6 +33,9 @@ newProjectBtn.addEventListener("click", () => {
     form.addEventListener("submit", e => {
         e.preventDefault();
 
+        isArchive = false;
+        todoForm.hidden = false;
+
         const projectName = input.value;
         const newProject = new Project(projectName);
 
@@ -39,7 +43,7 @@ newProjectBtn.addEventListener("click", () => {
         app.setCurrentProject(newProject.id);
 
         showProjects(app.projects);
-        showOpenTodos();
+        showCurrentProjectTodos();
         showProjectHeader(newProject);
         setActive(newProject.id);
         saveData(app.projects);
@@ -62,7 +66,7 @@ todoForm.addEventListener("submit", (e) => {
     app.addToCurrentProject(todo);
 
     showProjects(app.projects);
-    showOpenTodos();
+    showCurrentProjectTodos();
     setActive(app.getCurrentProject().id);
     saveData(app.projects);
 
@@ -83,7 +87,7 @@ buttonList.addEventListener("click", e => {
     
     app.setCurrentProject(projectId);
 
-    showOpenTodos();
+    showCurrentProjectTodos();
     showProjectHeader(project);
     setActive(projectId);
 });
@@ -97,7 +101,7 @@ deleteBtn.addEventListener("click", () => {
     app.setCurrentProject(defaultProject.id);
 
     showProjects(app.projects);
-    showOpenTodos();
+    showCurrentProjectTodos();
     showProjectHeader(defaultProject);
     setActive(defaultProject.id);
     saveData(app.projects);
@@ -117,7 +121,7 @@ todoList.addEventListener("click", (e) => {
     todo.toggleStatus();
 
     showProjects(app.projects);
-    showOpenTodos();
+    showCurrentProjectTodos();
     setActive(app.getCurrentProject().id);
     saveData(app.projects);
 });
@@ -134,8 +138,13 @@ todoList.addEventListener("click", (e) => {
     const todoCard = e.target.closest(".todo-card");
     if (!todoCard) return;
 
+    const todoDeleteBtn = e.target.closest(".todo-delete");
+    if (todoDeleteBtn) return;
+    
     const todoDetails = todoCard.querySelector(".todo-details");
+    const todoDelete = todoCard.querySelector(".todo-delete");
     todoDetails.hidden = !todoDetails.hidden;
+    todoDelete.hidden = !todoDelete.hidden;
 });
 
 todoList.addEventListener("click", (e) => {
@@ -156,7 +165,41 @@ todoList.addEventListener("click", (e) => {
     todo.changeProperty("priority", priority);
     todo.changeProperty("dueDate", dueDate);
 
-    showTodos(app.getCurrentProject().todos);
+    showCurrentProjectTodos();
     saveData(app.projects);
 
 });
+
+todoList.addEventListener("click", (e) => {
+    const deleteBtn = e.target.closest(".todo-delete");
+    if (!deleteBtn) return;
+    
+    const todoCard = deleteBtn.closest(".todo-card");
+    const todoId = todoCard.dataset.id;
+    const project = app.projects.find(project => project.todos.some(todo => todo.id === todoId))
+    project.removeTodo(todoId);
+    
+    if (isArchive) {
+        showTodos(app.getArchiveTodos());
+    } else {
+        showCurrentProjectTodos();
+        setActive(app.getCurrentProject().id);
+    }
+
+    showProjects(app.projects);
+    saveData(app.projects);
+
+});
+
+const archiveBtn = document.querySelector(".archive-btn");
+archiveBtn.addEventListener("click", () => {
+    isArchive = true;
+
+    const archiveTodos = app.getArchiveTodos();
+
+    showTodos(archiveTodos);
+    showProjectHeader({name: "Archive", isDefault: true});
+    setActive("archive");
+
+    todoForm.hidden = true;
+})
