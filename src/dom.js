@@ -1,4 +1,5 @@
 import deletIconSrc from "./asset/delete.svg";
+import checkIconSrc from "./asset/check.svg";
 
 function showProjects(projects) {
     const sidebar = document.querySelector(".button-list");
@@ -78,6 +79,12 @@ function showTodos(todos) {
         if (todo.status === "done") {
             todoCard.classList.add("done");
             todoDelete.hidden = false;
+
+            const checkIcon = document.createElement("img");
+            checkIcon.src = checkIconSrc;
+            checkIcon.alt = "Done";
+
+            todoStatus.append(checkIcon);
         }
 
         todoDelete.append(deleteIcon);
