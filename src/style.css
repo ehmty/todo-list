@@ -258,12 +258,9 @@ body {
     padding: 5px;
 }
 
-#due-date {
-    width: 6.5rem;
-}
-
+#due-date,
 .todo-input-bar select {
-    width: 4rem;
+    border: 1px solid var(--light-green);
 }
 
 .todo-input-bar button {
