@@ -1,309 +1,310 @@
 @font-face {
-    font-family: 'Roboto';
-    src: url('./asset/Roboto-Regular.woff2') format('woff2'),
-        url('./asset/Roboto-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Roboto";
+  src:
+    url("./asset/Roboto-Regular.woff2") format("woff2"),
+    url("./asset/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --blue: #1F2937;
-    --green: #A3B18A;
-    --light-green: #a3b18a50;
-    --creme: #F5F1E8;
+  --blue: #1f2937;
+  --green: #a3b18a;
+  --light-green: #a3b18a50;
+  --creme: #f5f1e8;
 }
 
 body {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    min-height: 100vh;
-    background-color: var(--creme);
-    color: var(--blue);
-    font-family: Roboto, system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  background-color: var(--creme);
+  color: var(--blue);
+  font-family: Roboto, system-ui, sans-serif;
 }
 
 .sidebar {
-    background-color: var(--blue);
-    color: var(--creme);
-    display: flex;
-    justify-content: center;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+  background-color: var(--blue);
+  color: var(--creme);
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 
 .sidebar-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
 }
 
 .sidebar-btn,
 .input {
-    border: none;
-    background-color: var(--blue);
-    color: var(--creme);
-    display: flex;
-    justify-content: space-between;
-    width: 160px;
-    border-radius: 10px;
-    padding: 0.8rem;
-    cursor: pointer;
+  border: none;
+  background-color: var(--blue);
+  color: var(--creme);
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
 }
 
 .input {
-    outline: none;
-    border: 1px solid var(--creme);
+  outline: none;
+  border: 1px solid var(--creme);
 }
 
 .button-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    border-top: 1px solid var(--creme);
-    border-bottom: 1px solid var(--creme);
-    padding-top: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--creme);
+  border-bottom: 1px solid var(--creme);
+  padding-top: 1rem;
 }
 
 .sidebar-btn.active {
-    background-color: var(--green);
+  background-color: var(--green);
 }
 
 .button-list span {
-    opacity: 50%;
+  opacity: 50%;
 }
 
 .new-project-btn {
-    border: 1px solid var(--creme);
-    background-color: var(--creme);
-    color: var(--blue);
+  border: 1px solid var(--creme);
+  background-color: var(--creme);
+  color: var(--blue);
 }
 
 .new-project-btn:active {
-    border-color: var(--blue);
+  border-color: var(--blue);
 }
 
 .archive-btn {
-    opacity: 0.75;
+  opacity: 0.75;
 }
 
 .archive-btn:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .content {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
 }
 
 .header {
-    display: flex;
-    gap: 1rem;
-    padding: 2rem;
-    box-shadow: 0 2px 4px -2px var(--blue);
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  box-shadow: 0 2px 4px -2px var(--blue);
 }
 
 .todo-list {
-    display: grid;
-    align-content: start;
-    gap: 1rem;
-    max-width: 600px;
-    margin: 2rem;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 2rem;
 }
 
 .todo-card {
-    border: 1px solid var(--light-green);
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto auto auto;
-    align-items: center;
-    gap: 1rem;
-    min-height: 3rem;
-    font-size: 0.8rem;
-    padding: 0.75rem 1.5rem;
+  border: 1px solid var(--light-green);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3rem;
+  font-size: 0.8rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .todo-card:hover {
-    background-color: var(--light-green);
+  background-color: var(--light-green);
 }
 
 .todo-card .status {
-    border: 1px solid var(--green);
-    border-radius: 0.75rem;
-    width: 1.5rem;
-    height: 1.5rem;
+  border: 1px solid var(--green);
+  border-radius: 0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .todo-card.done {
-    opacity: 0.65;
+  opacity: 0.65;
 }
 
 .todo-card.done .title {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .todo-card.done .status {
-    background-color: var(--green);
+  background-color: var(--green);
 }
 
 .status:active {
-    background-color: var(--green);
+  background-color: var(--green);
 }
 
 .priority {
-    padding: 5px 10px;
-    border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .high {
-    background-color: #FFC7CE;
-    color: #9C0006;
+  background-color: #ffc7ce;
+  color: #9c0006;
 }
 
 .medium {
-    background-color: #FFEB9C;
-    color: #9C6500;
+  background-color: #ffeb9c;
+  color: #9c6500;
 }
 
 .low {
-    background-color: #C6EFCE;
-    color: #006100;
+  background-color: #c6efce;
+  color: #006100;
 }
 
 .todo-details {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.75rem;
-    padding-top: 1rem;
-    margin-top: 0.25rem;
-    border-top: 1px solid var(--light-green);
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--light-green);
 }
 
 .todo-details[hidden] {
-    display: none;
+  display: none;
 }
 
 .title-input,
 .description,
 .priority-input,
 .due-date-input {
-    border: 1px solid var(--light-green);
-    border-radius: 5px;
-    background-color: var(--creme);
-    color: var(--blue);
-    font: inherit;
-    outline: none;
+  border: 1px solid var(--light-green);
+  border-radius: 5px;
+  background-color: var(--creme);
+  color: var(--blue);
+  font: inherit;
+  outline: none;
 }
 
 .title-input {
-    grid-column: 1 / -1;
-    padding: 0.5rem 0.75rem;
-    font-weight: 600;
+  grid-column: 1 / -1;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
 }
 
 .description {
-    grid-column: 1 / -1;
-    min-height: 4rem;
-    resize: vertical;
-    padding: 0.75rem;
+  grid-column: 1 / -1;
+  min-height: 4rem;
+  resize: vertical;
+  padding: 0.75rem;
 }
 
 .priority-input,
 .due-date-input {
-    padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.6rem;
 }
 
 .todo-card .save-btn {
-    border: none;
-    border-radius: 5px;
-    background-color: var(--green);
-    color: var(--creme);
-    font: inherit;
-    padding: 0.4rem 0.8rem;
-    cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--green);
+  color: var(--creme);
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
 }
 
 .todo-input-bar {
-    border: 1px solid var(--light-green);
-    background-color: var(--creme);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    height: 3rem;
-    padding: 1rem;
-    margin: 0 1rem 1rem;
+  border: 1px solid var(--light-green);
+  background-color: var(--creme);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 3rem;
+  padding: 1rem;
+  margin: 0 1rem 1rem;
 }
 
 .todo-input-bar[hidden] {
-    display: none;
+  display: none;
 }
 
 #title,
 #due-date,
 .todo-input-bar select {
-    font-family: inherit;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    background-color: var(--creme);
-    color: var(--blue);
-    font-size: 1rem;
-    padding: 5px;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: var(--creme);
+  color: var(--blue);
+  font-size: 1rem;
+  padding: 5px;
 }
 
 #due-date,
 .todo-input-bar select {
-    border: 1px solid var(--light-green);
+  border: 1px solid var(--light-green);
 }
 
 .todo-input-bar button {
-    border: 1px solid var(--light-green);
-    background-color: var(--light-green);
-    color: var(--blue);
-    border-radius: 0.75rem;
-    height: 1.5rem;
-    width: 1.5rem;
+  border: 1px solid var(--light-green);
+  background-color: var(--light-green);
+  color: var(--blue);
+  border-radius: 0.75rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .todo-input-bar button:active {
-    border-color: var(--creme);
+  border-color: var(--creme);
 }
 
 .todo-input-bar input[type="text"] {
-    flex: 1;
+  flex: 1;
 }
 
 .todo-delete,
 .delete-project-btn {
-    border: none;
-    background: none;
-    cursor: pointer;    
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .todo-delete img,
 .delete-project-btn img {
-    width: 20px;
-    height: 20px;
-    opacity: 45%;
+  width: 20px;
+  height: 20px;
+  opacity: 45%;
 }
 
 .todo-delete:hover img,
 .delete-project-btn:hover img {
-    opacity: 80%;
+  opacity: 80%;
 }
 
 .todo-delete:active img,
 .delete-project-btn:active img {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }

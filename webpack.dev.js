@@ -7,4 +7,4 @@ export default merge(common, {
   devServer: {
     static: "./dist",
   },
-}); 
+});

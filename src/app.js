@@ -1,81 +1,84 @@
 class Todo {
-    constructor(title, description, priority, dueDate, status) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.status = status;
-        this.id = crypto.randomUUID();        
-    }
+  constructor(title, description, priority, dueDate, status) {
+    this.title = title;
+    this.description = description;
+    this.priority = priority;
+    this.dueDate = dueDate;
+    this.status = status;
+    this.id = crypto.randomUUID();
+  }
 
-    changeProperty(name, value) {
-        this[name] = value;
-    }
+  changeProperty(name, value) {
+    this[name] = value;
+  }
 
-    toggleStatus() {
-        this.status = this.status === "open" ? "done" : "open";
-    }
+  toggleStatus() {
+    this.status = this.status === "open" ? "done" : "open";
+  }
 }
 
 class Project {
-    constructor(name, isDefault = false) {
-        this.name = name;
-        this.todos = [];
-        this.id = crypto.randomUUID();
-        this.isDefault = isDefault;
-    }
+  constructor(name, isDefault = false) {
+    this.name = name;
+    this.todos = [];
+    this.id = crypto.randomUUID();
+    this.isDefault = isDefault;
+  }
 
-    addTodo(todo) {
-        this.todos.push(todo);
-    }
+  addTodo(todo) {
+    this.todos.push(todo);
+  }
 
-    removeTodo(id) {
-        this.todos = this.todos.filter(todo => todo.id !== id);
-    }
+  removeTodo(id) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+  }
 }
 
 class App {
-    constructor() {
-        const defaultProject = new Project("Inbox", true);
-        this.projects = [defaultProject];
-        this.currentProjectId = defaultProject.id;
-    }
+  constructor() {
+    const defaultProject = new Project("Inbox", true);
+    this.projects = [defaultProject];
+    this.currentProjectId = defaultProject.id;
+  }
 
-    getCurrentProject() {
-        return this.projects.find(project => this.currentProjectId === project.id);
-    }
+  getCurrentProject() {
+    return this.projects.find(
+      (project) => this.currentProjectId === project.id,
+    );
+  }
 
-    setCurrentProject(id) {
-        this.currentProjectId = id;
-    }
+  setCurrentProject(id) {
+    this.currentProjectId = id;
+  }
 
-    addToCurrentProject(todo) {
-        const currentProject = this.getCurrentProject();
-        currentProject.addTodo(todo);
-    }
+  addToCurrentProject(todo) {
+    const currentProject = this.getCurrentProject();
+    currentProject.addTodo(todo);
+  }
 
-    addProject(project) {
-        this.projects.push(project);
-    }
+  addProject(project) {
+    this.projects.push(project);
+  }
 
-    removeProject(id) {
-        this.projects = this.projects.filter(project => project.isDefault || project.id !== id);
-    }
+  removeProject(id) {
+    this.projects = this.projects.filter(
+      (project) => project.isDefault || project.id !== id,
+    );
+  }
 
-    getArchiveTodos() {
-        const todos = [];
+  getArchiveTodos() {
+    const todos = [];
 
-        for (const project of this.projects) {
-            for (const todo of project.todos) {
-                if (todo.status === "done") {
-                    todos.push(todo);
-                }
-            }
+    for (const project of this.projects) {
+      for (const todo of project.todos) {
+        if (todo.status === "done") {
+          todos.push(todo);
         }
-
-        return todos;
+      }
     }
-    
+
+    return todos;
+  }
 }
 
 export { Todo, Project, App };
